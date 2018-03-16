@@ -1,0 +1,100 @@
+.wrapper {
+    margin-top: 2%;
+}
+
+label {
+    font-family: Helvetica;
+}
+
+div.submit-button {
+    cursor: pointer;
+    background-color: gainsboro;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 25%;
+    margin: auto;
+}
+
+div.submit-button:active {
+    background-color: darkgray;
+}
+
+h1.title {
+    text-align: center;
+    white-space: nowrap;
+    color: black;
+}
+
+.no-select {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.info{
+    /*float: left;*/
+    width: 390px;
+    margin: auto;
+}
+
+label {
+    float: left;
+    padding-right: 20px;
+}
+
+.username, .password, .api-token, .start-date, .end-date{
+    width: 215px;
+    float: right;
+}
+
+form {
+    margin: 0;
+}
+
+form div {
+    padding-bottom: 30px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table tr th, table tr td {
+    text-align: center;
+}
+
+table h1 {
+    padding-top: 25px;
+    font-family: Helvetica;
+}
+
+tr td:not(.error) {
+    padding-right: 10px;
+    white-space: nowrap;
+    width: 15%;
+    height: 50px;
+}
+
+.results-tables-wrapper {
+    width: 75%;
+    margin: auto;
+}
+
+.results-tables {
+    margin: auto;
+    text-align: center;
+}
+
+.success-table, .failure-table {
+    width: 100%;
+}
+
+.loading {
+    text-align: center;
+}
+
+.error {
+    word-wrap: break-word;
+}

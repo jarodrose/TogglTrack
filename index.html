@@ -1,0 +1,98 @@
+<html>
+<head>
+    <link rel="stylesheet" href="TogglTrack/toggl-track.css">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script language="javascript"></script>
+</head>
+</html>
+<body>
+    <div class="wrapper">
+        <div class="info">
+            <form>
+                <div>
+                    <label for="username">YouTrack Username:</label>
+                    <input class="username" id="username" type="text" title="Username" required>
+                </div>
+
+                <div>
+                    <label for="password">YouTrack Password:</label>
+                    <input class="password" id="password" type="password" title="Password" required>
+                </div>
+
+                <div>
+                    <label for="api-token">Toggl API Token:</label>
+                    <input class="api-token" id="api-token" type="text" title="API Token" required>
+                </div>
+
+                <div>
+                    <label for="start-date">Start:</label>
+                    <input class="start-date" id="start-date" type="date" title="Start Date">
+                </div>
+
+                <div>
+                    <label for="end-date">End:</label>
+                    <input class="end-date" id="end-date" type="date" title="End Date">
+                </div>
+
+            </form>
+        </div>
+
+        <div onclick="importTime()" class="submit-button">
+            <h1 class="title no-select">Import Time</h1>
+        </div>
+
+        <div class="loading"></div>
+    </div>
+
+    <div class="results-tables-wrapper"></div>
+</body>
+
+<script>
+    function importTime() {
+        var username = $('.username').val();
+        var password = $('.password').val();
+        var token = $('.api-token').val();
+        var startDate = $('.start-date').val();
+        var endDate = $('.end-date').val();
+
+        if (!username || !password || !token) {
+            alert('Must enter username, password, and token');
+            return;
+        }
+
+        localStorage.setItem("username", username);
+        localStorage.setItem("api-token", token);
+
+        $('.loading').html('Loading...');
+
+        $.ajax({
+            type: "POST",
+            url: "TogglTrack/app.php",
+            data: {
+                username: username,
+                password: password,
+                apiToken: token,
+                startDate: startDate,
+                endDate: endDate
+            },
+            success: function (results) {
+                $.ajax({
+                    type: "POST",
+                    url: "TogglTrack/results.php",
+                    data:{
+                        results: results
+                    },
+                    success: function (tables) {
+                        $('.loading').empty();
+                        $('.results-tables-wrapper').html(tables);
+                    }
+                });
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $('.username').val(localStorage.getItem("username"));
+        $('.api-token').val(localStorage.getItem("api-token"));
+    });
+</script>
